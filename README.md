@@ -146,4 +146,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 
-We would like to thank all contributors and users of PRegress for their support and feedback.  Special thanks to Mintra Putlek.
+We would like to thank all contributors and users of PRegress for their support and feedback.  Special thanks to Mintra Putlek!
