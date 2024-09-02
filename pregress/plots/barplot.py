@@ -4,27 +4,33 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-def barplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Barplots of Variables", xlab="Variable", ylab="Value", subplot=None):
+def boxplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Boxplots of Variables", xlab="Variable", ylab="Value", subplot=None):
     """
-    Generates and prints bar plots for all numeric variables specified in the formula or all numeric variables in the data if no formula is provided.
+    Generates and prints boxplots for all numeric variables specified in the formula or all numeric variables in the data if no formula is provided.
 
     Args:
         formula (str, optional): Formula to define the model (dependent ~ independent).
         data (DataFrame, optional): Data frame containing the data.
-        xcolor (str, optional): Color of the bars for the independent variables.
-        ycolor (str, optional): Color of the bars for the dependent variable.
+        xcolor (str, optional): Color of the boxplots for the independent variables.
+        ycolor (str, optional): Color of the boxplots for the dependent variable.
         main (str, optional): Title of the plot.
         xlab (str, optional): Label for the x-axis.
         ylab (str, optional): Label for the y-axis.
+        subplot (tuple, optional): A tuple specifying the subplot grid (nrows, ncols, index).
+                                   If None, a new figure is created.
 
     Returns:
-        None. The function creates and shows bar plots.
+        None. The function creates and shows boxplots.
     """
+    if isinstance(formula, pd.DataFrame):
+        data = formula
+        formula = None
+
     if formula is not None:
         formula = formula + "+0"
         Y_name, X_names, Y_out, X_out = parse_formula(formula, data)
 
-        # Combine Y and X data for bar plots
+        # Combine Y and X data for boxplots
         plot_data = pd.concat([pd.Series(Y_out, name=Y_name), X_out], axis=1)
 
         # Melt the DataFrame for easier plotting with seaborn
@@ -44,15 +50,20 @@ def barplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Barplots
         # Create a single color mapping for all variables
         palette = {var: xcolor for var in plot_data_melted['Variable'].unique()}
 
-    # Create the bar plot
-    plt.figure(figsize=(10, 6))
-    barplot = sns.barplot(x='Variable', y='Value', data=plot_data_melted, hue='Variable', dodge=False, palette=palette, errorbar=None, legend=False)
+    # If a subplot is specified, create a subplot within the given grid; otherwise, use a new figure
+    if subplot:
+        plt.subplot(*subplot)
+    else:
+        plt.figure(figsize=(10, 6))
 
-    barplot.set_title(main)
-    barplot.set_xlabel(xlab)
-    barplot.set_ylabel(ylab)
+    # Create the boxplot
+    sns.boxplot(x='Variable', y='Value', data=plot_data_melted, palette=palette, hue='Variable', dodge=False)
 
-    # Show the plot if subplot is not specified
+    plt.title(main)
+    plt.xlabel(xlab)
+    plt.ylabel(ylab)
+
+    # Show the plot only if no subplot is provided
     if subplot is None:
         plt.show()
         plt.clf()
