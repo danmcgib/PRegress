@@ -20,6 +20,11 @@ def boxplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Boxplots
     Returns:
         None. The function creates and shows boxplots.
     """
+    # If the first argument is a DataFrame, shift it to the 'data' parameter
+    if isinstance(formula, pd.DataFrame):
+        data = formula
+        formula = None
+        
     if formula is not None:
         formula = formula + "+0"
         Y_name, X_names, Y_out, X_out = parse_formula(formula, data)
