@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
-def customLine(intercept, slope, num_points=100):
+def abline(intercept, slope, num_points=100):
     """
     Creates a statsmodels OLS object with a manually specified slope and intercept.
 
