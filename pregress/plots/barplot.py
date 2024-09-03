@@ -16,6 +16,8 @@ def barplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Barplots
         main (str, optional): Title of the plot.
         xlab (str, optional): Label for the x-axis.
         ylab (str, optional): Label for the y-axis.
+        subplot (tuple, optional): A tuple specifying the subplot grid (nrows, ncols, index).
+                                   If None, a new figure is created.
 
     Returns:
         None. The function creates and shows bar plots.
@@ -44,15 +46,20 @@ def barplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Barplots
         # Create a single color mapping for all variables
         palette = {var: xcolor for var in plot_data_melted['Variable'].unique()}
 
+    # If a subplot is specified, create a subplot within the given grid; otherwise, use a new figure
+    if subplot:
+        plt.subplot(*subplot)
+    else:
+        plt.figure(figsize=(10, 6))
+
     # Create the bar plot
-    plt.figure(figsize=(10, 6))
-    barplot = sns.barplot(x='Variable', y='Value', data=plot_data_melted, hue='Variable', dodge=False, palette=palette, errorbar=None, legend=False)
+    sns.barplot(x='Variable', y='Value', data=plot_data_melted, hue='Variable', dodge=False, palette=palette, errorbar=None, legend=False)
 
-    barplot.set_title(main)
-    barplot.set_xlabel(xlab)
-    barplot.set_ylabel(ylab)
+    plt.title(main)
+    plt.xlabel(xlab)
+    plt.ylabel(ylab)
 
-    # Show the plot if subplot is not specified
+    # Show the plot only if no subplot is provided
     if subplot is None:
         plt.show()
         plt.clf()
