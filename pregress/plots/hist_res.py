@@ -3,7 +3,7 @@ from pregress.modeling.fit import fit
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plotRH(model, subplot=None):
+def hist_res(model, subplot=None):
     """
     Plots a histogram of the residuals of a fitted statsmodels regression model and overlays a normal distribution curve.
 

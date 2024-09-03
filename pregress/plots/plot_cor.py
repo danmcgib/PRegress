@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def plotCor(df, main='Correlation Matrix', subplot=None):
+def plot_cor(df, main='Correlation Matrix', subplot=None):
     """
     Generates a heatmap for the correlation matrix of a DataFrame.
 

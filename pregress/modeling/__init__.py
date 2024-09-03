@@ -22,8 +22,6 @@ format_summary
     Format the summary of the model.
 handle_included_vars
     Handle included variables in the model.
-handle_included_vars2
-    Handle additional included variables in the model.
 parse_formula
     Parse the formula for the model.
 predict
@@ -46,9 +44,9 @@ summary
 
 from .add_explicit_variable import add_explicit_variable
 from .apply_transformation import apply_transformation
-from .boxCox import boxCox
-from .bpTest import bpTest
-from .BSR import BSR
+from .box_cox import box_cox
+from .bp_test import bp_test
+from .bsr import bsr
 from .environment import EvalEnvironment
 from .extract_variable import extract_variable
 from .fit import fit
@@ -61,17 +59,17 @@ from .print_anova_and_summary import print_anova_and_summary
 from .print_anova_table import print_anova_table
 from .print_r_summary import print_r_summary
 from .print_stata_summary import print_stata_summary
-from .shapiroTest import shapiroTest
+from .shapiro_test import shapiro_test
 from .significance_code import significance_code
 from .step import step
 from .summary import summary
 from .vif import vif
-from .xysplit import xysplit
+from .xy_split import xy_split
 
 __all__ = [
-    'add_explicit_variable', 'apply_transformation', 'boxCox', 'bpTest', 'BSR', 
+    'add_explicit_variable', 'apply_transformation', 'box_cox', 'bp_test', 'bsr', 
     'EvalEnvironment', 'extract_variable', 'fit',
     'format_summary', 'handle_included_vars', 'intervals', 'parse_formula', 'predict',
     'print_anova_and_summary', 'print_anova_table', 'print_r_summary', 'print_stata_summary',
-    'shapiroTest', 'significance_code', 'step','summary', 'vif', 'xysplit'
+    'shapiro_test', 'significance_code', 'step','summary', 'vif', 'xy_split'
 ]

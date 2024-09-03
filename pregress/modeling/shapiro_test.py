@@ -2,7 +2,7 @@ from scipy.stats import shapiro
 import statsmodels.api as sm
 import numpy as np
 
-def shapiroTest(input_data, out=True):
+def shapiro_test(input_data, out=True):
     """
     Perform the Shapiro-Wilk test for normality on a given vector or statsmodels regression results object.
 
