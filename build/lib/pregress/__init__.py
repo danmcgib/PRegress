@@ -1,3 +1,5 @@
+import warnings
+
 """
 PRegress Package
 ================
@@ -16,69 +18,76 @@ Functions
 Modeling functions:
 - add_explicit_variable
 - apply_transformation
-- boxCox
-- bpTest
-- BSR
+- box_cox
+- bp_test
+- bsr
 - EvalEnvironment
 - extract_variable
 - fit
 - format_summary
 - handle_included_vars
+- intervals
 - parse_formula
 - predict
 - print_anova_and_summary
 - print_anova_table
 - print_r_summary
 - print_stata_summary
-- shapiroTest
+- shapiro_test
 - significance_code
 - step
 - summary
 - vif
-- xysplit
+- xy_split
 
 Plotting functions:
 - barplot
 - boxplot
-- customLine
+- abline
 - hist
 - hists
-- plotCor
-- plotCook
-- plotQQ
-- plotR
-- plotRH
+- plot_cor
+- plot_cook
+- plot_qq
+- plot_res
+- hist_res
 - plots
-- plotXY
+- plot_xy
+- plot_intervals
 """
 
 # Import modeling functions
 from .modeling import (
-    add_explicit_variable, apply_transformation, boxCox, bpTest, BSR, EvalEnvironment, extract_variable, fit,
+    add_explicit_variable, apply_transformation, box_cox, bp_test, bsr, EvalEnvironment, extract_variable, fit,
     format_summary, handle_included_vars, intervals, parse_formula, predict,
-    print_anova_and_summary, print_anova_table, print_r_summary, print_stata_summary, shapiroTest,
-    significance_code, step, summary, vif, xysplit
+    print_anova_and_summary, print_anova_table, print_r_summary, print_stata_summary, shapiro_test,
+    significance_code, step, summary, vif, xy_split
 )
 
 # Import plotting functions
 from .plots import (
-    barplot, boxplot, customLine, hist, hists, plotCor, plotCook, plotQQ, plotR, plotRH, plots, plotXY
+    barplot, boxplot, abline, hist, hists, plot_cor, plot_cook, plot_intervals, plot_qq, plot_res, hist_res, plots, plot_xy
 )
 
+# Define plotXY as an alias for plot_xy if not already done in plots.py
+def plotXY(*args, **kwargs):
+    warnings.warn("plotXY is deprecated, use plot_xy instead", DeprecationWarning)
+    return plot_xy(*args, **kwargs)
+  
 from .plots.plots import plots
 
 from .utils import get_data
 
 __all__ = [
     # Modeling functions
-    'add_explicit_variable', 'apply_transformation', 'boxCox', 'bpTest', 'BSR', 'EvalEnvironment', 'extract_variable', 'fit',
+    'add_explicit_variable', 'apply_transformation', 'box_cox', 'bp_test', 'bsr', 'EvalEnvironment', 'extract_variable', 'fit',
     'format_summary', 'handle_included_vars', 'intervals', 'parse_formula', 'predict',
-    'print_anova_and_summary', 'print_anova_table', 'print_r_summary', 'print_stata_summary', 'shapiroTest',
-    'significance_code', 'step', 'summary', 'vif', 'xysplit',
+    'print_anova_and_summary', 'print_anova_table', 'print_r_summary', 'print_stata_summary', 'shapiro_test',
+    'significance_code', 'step', 'summary', 'vif', 'xy_split',
     
     # Plotting functions
-    'barplot','boxplot', 'customLine', 'hist', 'hists', 'plotCor', 'plotCook', 'plotQQ', 'plotR', 
-    'plotRH', 'plots', 'plotXY',
+    'barplot','boxplot', 'abline', 'hist', 'hists', 'plot_cor', 'plot_cook', 'plot_intervals', 'plot_qq', 
+    'plot_res', 'hist_res', 'plots', 'plot_xy', 'plotXY',
     
     # Utility functions
     'get_data'

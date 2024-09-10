@@ -1,7 +1,7 @@
 import statsmodels.api as sm
 from statsmodels.stats.diagnostic import het_breuschpagan
 
-def bpTest(model, out=True):
+def bp_test(model, out=True):
     """
     Perform the Breusch-Pagan test for heteroscedasticity on a given statsmodels regression results object.
 

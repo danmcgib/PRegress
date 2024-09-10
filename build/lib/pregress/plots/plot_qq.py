@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plotQQ(model, subplot=None):
+def plot_qq(model, subplot=None):
     """
     Generates a QQ plot for the residuals of a fitted statsmodels regression model to assess normality,
     including a 95% confidence band.

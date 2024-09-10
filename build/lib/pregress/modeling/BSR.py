@@ -4,7 +4,7 @@ import statsmodels.api as sm
 from itertools import combinations
 from .parse_formula import parse_formula  # Ensure correct import based on your setup
 
-def BSR(formula, data, max_var=8, sortby="adjr2"):
+def bsr(formula, data, max_var=8, sortby="adjr2"):
     """
     Perform Best Subset Regression based on the given formula, data, and parameters.
 

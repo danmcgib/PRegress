@@ -16,34 +16,37 @@ hists
     Create multiple histograms of the data.
 plot_cor
     Plot the correlation matrix.
-plotCook
+plot_cook
     Create a Cook's distance plot.
-plotQQ
+plot_intervals
+    Create an intervals plot.
+plot_qq
     Create a QQ plot.
-plotR
+plot_res
     Plot the residuals.
-plotRH
+hist_res
     Plot the residuals vs. fitted values.
 plots
     Create various plots.
-plotXY
+plot_xy
     Plot the X vs. Y data.
 """
 
 from .barplot import barplot
 from .boxplot import boxplot
-from .customLine import customLine
+from .abline import abline
 from .hist import hist
 from .hists import hists
-from .plotCor import plotCor
-from .plotCook import plotCook
-from .plotQQ import plotQQ
-from .plotR import plotR
-from .plotRH import plotRH
+from .plot_intervals import plot_intervals
+from .plot_cor import plot_cor
+from .plot_cook import plot_cook
+from .plot_qq import plot_qq
+from .plot_res import plot_res
+from .hist_res import hist_res
 from .plots import plots
-from .plotXY import plotXY
+from .plot_xy import plot_xy
 
 __all__ = [
-    'barplot', 'boxplot', 'customLine', 'hist', 'hists', 'plotCor', 'plotCook', 'plotQQ', 'plotR',
-    'plotRH', 'plots', 'plotXY'
+    'barplot', 'boxplot', 'abline', 'hist', 'hists', 'plot_cor', 'plot_cook', 'plot_intervals', 'plot_qq', 'plot_res',
+    'hist_res', 'plots', 'plot_xy'
 ]

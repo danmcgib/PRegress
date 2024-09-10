@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-def boxplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Boxplots of Variables", xlab="Variable", ylab="Value", subplot = None):
+def boxplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Boxplots of Variables", xlab="Variable", ylab="Value", subplot=None, **kwargs):
     """
     Generates and prints boxplots for all numeric variables specified in the formula or all numeric variables in the data if no formula is provided.
 
@@ -13,13 +13,19 @@ def boxplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Boxplots
         data (DataFrame, optional): Data frame containing the data.
         xcolor (str, optional): Color of the boxplots for the independent variables.
         ycolor (str, optional): Color of the boxplots for the dependent variable.
-        main (str, optional): Title of the boxplot.
+        main (str, optional): Title of the plot.
         xlab (str, optional): Label for the x-axis.
         ylab (str, optional): Label for the y-axis.
+        subplot (tuple, optional): A tuple specifying the subplot grid (nrows, ncols, index).
+                                   If None, a new figure is created.
 
     Returns:
         None. The function creates and shows boxplots.
     """
+    if isinstance(formula, pd.DataFrame):
+        data = formula
+        formula = None
+
     if formula is not None:
         formula = formula + "+0"
         Y_name, X_names, Y_out, X_out = parse_formula(formula, data)
@@ -30,31 +36,35 @@ def boxplot(formula=None, data=None, xcolor="blue", ycolor="red", main="Boxplots
         # Melt the DataFrame for easier plotting with seaborn
         plot_data_melted = plot_data.melt(var_name='Variable', value_name='Value')
 
-        # Create a color palette
-        palette = {Y_name: ycolor, **{var: xcolor for var in X_names}}
+        # Create a color mapping for columns
+        palette = {Y_name: ycolor}
+        palette.update({x: xcolor for x in X_names})
+
     else:
         # If no formula is provided, use all numeric variables in the data
         plot_data = data.select_dtypes(include=[np.number])
+
+        # Melt the DataFrame for easier plotting with seaborn
         plot_data_melted = plot_data.melt(var_name='Variable', value_name='Value')
 
-        # Create a single color for all variables
-        palette = {var: xcolor for var in plot_data.columns}
+        # Create a single color mapping for all variables
+        palette = {var: xcolor for var in plot_data_melted['Variable'].unique()}
+
+    # If a subplot is specified, create a subplot within the given grid; otherwise, use a new figure
+    if subplot:
+        plt.subplot(*subplot)
+    else:
+        plt.figure(figsize=(10, 6))
 
     # Create the boxplot
-    plt.figure(figsize=(10, 6))
-    boxplot = sns.boxplot(x='Variable', y='Value', data=plot_data_melted, palette=palette, hue='Variable', dodge=False)
-    boxplot.set_title(main)
-    boxplot.set_xlabel(xlab)
-    boxplot.set_ylabel(ylab)
+    sns.boxplot(x='Variable', y='Value', data=plot_data_melted, palette=palette, hue='Variable', dodge=False, **kwargs)
 
-    # Show the plot if subplot is not specified
+    plt.title(main)
+    plt.xlabel(xlab)
+    plt.ylabel(ylab)
+
+    # Show the plot only if no subplot is provided
     if subplot is None:
         plt.show()
         plt.clf()
         plt.close()
-
-
-
-
-
-

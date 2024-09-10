@@ -5,7 +5,7 @@ import seaborn as sns
 import numpy as np
 import pandas as pd
 
-def plotXY(formula, data=None, model=None, pcolor="blue", lcolor="red", xlab=None, ylab=None, main=None, psize=50, subplot=None, **kwargs):
+def plot_xy(formula, data=None, model=None, pcolor="blue", lcolor="red", xlab=None, ylab=None, main=None, psize=50, subplot=None, **kwargs):
     """
     Generates and prints a plot of the regression model fit using a specified formula and data.
     It supports plotting for models with one predictor variable, including potentially nonlinear relationships.
@@ -98,3 +98,7 @@ def plotXY(formula, data=None, model=None, pcolor="blue", lcolor="red", xlab=Non
         plt.show()
         plt.clf()
         plt.close()
+
+
+
+
