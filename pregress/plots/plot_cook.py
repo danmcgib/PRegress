@@ -3,7 +3,7 @@ import statsmodels.api as sm
 import numpy as np
 from statsmodels.graphics.gofplots import ProbPlot
 
-def plotCook(model, threshold=0.5, subplot=None):
+def plot_cook(model, threshold=0.5, subplot=None):
     """
     Plots Cook's Distance for each observation in a fitted statsmodels regression model to identify influential points.
 

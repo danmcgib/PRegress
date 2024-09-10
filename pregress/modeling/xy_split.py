@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 
-def xysplit(formula, data, train=None, test=None, dummies=[True, True], array=True, **kwargs):
+def xy_split(formula, data, train=None, test=None, dummies=[True, True], array=True, **kwargs):
     """
     Splits data into predictor and response variables based on a formula and optionally splits into training and testing sets.
 
