@@ -4,7 +4,7 @@ from scipy.stats import boxcox
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
-def boxCox(model):
+def box_cox(model):
     """
     Perform a Box-Cox transformation on the response variable of a given statsmodels regression results object,
     output a plot of the log-likelihood as a function of lambda, the rounded lambda, and the actual lambda value.

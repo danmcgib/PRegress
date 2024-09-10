@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
 
-def plotR(model, subplot=None):
+def plot_res(model, subplot=None):
     """
     Plots the residuals of a fitted statsmodels regression model.
 

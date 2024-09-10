@@ -26,6 +26,7 @@ Modeling functions:
 - fit
 - format_summary
 - handle_included_vars
+- intervals
 - parse_formula
 - predict
 - print_anova_and_summary
@@ -52,6 +53,7 @@ Plotting functions:
 - hist_res
 - plots
 - plot_xy
+- plot_intervals
 """
 
 # Import modeling functions
@@ -64,7 +66,7 @@ from .modeling import (
 
 # Import plotting functions
 from .plots import (
-    barplot, boxplot, abline, hist, hists, plot_cor, plot_cook, plot_qq, plot_res, hist_res, plots, plot_xy
+    barplot, boxplot, abline, hist, hists, plot_cor, plot_cook, plot_intervals, plot_qq, plot_res, hist_res, plots, plot_xy
 )
 
 # Define plotXY as an alias for plot_xy if not already done in plots.py
@@ -84,8 +86,8 @@ __all__ = [
     'significance_code', 'step', 'summary', 'vif', 'xy_split',
     
     # Plotting functions
-    'barplot','boxplot', 'abline', 'hist', 'hists', 'plot_cor', 'plot_cook', 'plot_qq', 'plot_res', 
-    'hist_res', 'plots', 'plot_xy', 'plotXY',
+    'barplot','boxplot', 'abline', 'hist', 'hists', 'plot_cor', 'plot_cook', 'plot_intervals', 'plot_qq', 
+    'plot_res', 'hist_res', 'plots', 'plot_xy', 'plotXY',
     
     # Utility functions
     'get_data'

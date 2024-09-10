@@ -18,6 +18,8 @@ plot_cor
     Plot the correlation matrix.
 plot_cook
     Create a Cook's distance plot.
+plot_intervals
+    Create an intervals plot.
 plot_qq
     Create a QQ plot.
 plot_res
@@ -35,6 +37,7 @@ from .boxplot import boxplot
 from .abline import abline
 from .hist import hist
 from .hists import hists
+from .plot_intervals import plot_intervals
 from .plot_cor import plot_cor
 from .plot_cook import plot_cook
 from .plot_qq import plot_qq
@@ -44,6 +47,6 @@ from .plots import plots
 from .plot_xy import plot_xy
 
 __all__ = [
-    'barplot', 'boxplot', 'abline', 'hist', 'hists', 'plot_cor', 'plot_cook', 'plot_qq', 'plot_res',
+    'barplot', 'boxplot', 'abline', 'hist', 'hists', 'plot_cor', 'plot_cook', 'plot_intervals', 'plot_qq', 'plot_res',
     'hist_res', 'plots', 'plot_xy'
 ]
