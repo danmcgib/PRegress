@@ -2,6 +2,7 @@ from .hist import hist
 from pregress.modeling.fit import fit
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import stats  # Import for statistical functions
 
 def hist_res(model, subplot=None):
     """
@@ -29,18 +30,18 @@ def hist_res(model, subplot=None):
     p = stats.norm.pdf(x, mu, std)
 
     # Plot the normal distribution curve
-    plt.plot(x, p, 'k', linewidth=2, label=f'Normal Dist. Mean={mu:.2f}, Std={std:.2f}')
-    title = "Fit results: mu = %.2f,  std = %.2f" % (mu, std)
-    plt.title(title)
+    plt.plot(x, p, 'k', linewidth=2, label='Normal Distribution')
 
-    # Add labels and legend
+    # Update the title
+    plt.title('Histogram of Residuals')
+
+    # Add labels and move the legend to the upper left corner
     plt.xlabel('Residuals')
     plt.ylabel('Density')
-    plt.legend()
+    plt.legend(loc='upper left')
 
     # Show the plot if subplot is not specified
     if subplot is None:
         plt.show()
         plt.clf()
         plt.close()
-
