@@ -7,14 +7,14 @@ from scipy.stats import norm as normal_dist
 import warnings
 
 
-def hists(formula, data=None, bins=30, xcolor="blue", ycolor="red", norm=False, layout="matrix",
+def hists(input_data=None, data=None, bins=30, xcolor="blue", ycolor="red", norm=False, layout="matrix",
           main="Distribution of Variables", xlab=None, ylab="Frequency", subplot=None):
     """
-    Generates and prints histograms for all numeric variables specified in the formula.
+    Generates and prints histograms for all numeric variables specified in the formula or all numeric variables in the DataFrame.
 
     Args:
-        formula (str): Formula to define the model (dependent ~ independent).
-        data (DataFrame, optional): Data frame containing the data.
+        input_data (str or DataFrame): Formula to define the model (dependent ~ independent), a single column name, or a DataFrame containing the data.
+        data (DataFrame, optional): Data frame containing the data if a formula is provided.
         bins (int, optional): Number of bins for the histograms.
         xcolor (str, optional): Color of the histograms for the independent variables.
         ycolor (str, optional): Color of the histograms for the dependent variable.
@@ -29,11 +29,19 @@ def hists(formula, data=None, bins=30, xcolor="blue", ycolor="red", norm=False, 
         None. The function creates and shows histograms.
     """
 
-    formula = formula + "+0"
-    Y_name, X_names, Y_out, X_out = parse_formula(formula, data)
-
-    # Combine Y and X data for histograms
-    plot_data = pd.concat([pd.Series(Y_out, name=Y_name), X_out], axis=1)
+    # Case 1: Handle single variable input without "~"
+    if isinstance(input_data, str) and '~' not in input_data:
+        plot_data = pd.DataFrame({input_data: data[input_data]})
+        Y_name = None
+    # Case 2: Directly given DataFrame
+    elif isinstance(input_data, pd.DataFrame):
+        plot_data = input_data.select_dtypes(include=[np.number])
+        Y_name = None
+    # Case 3: Formula provided
+    else:
+        formula = input_data + "+0"
+        Y_name, X_names, Y_out, X_out = parse_formula(formula, data)
+        plot_data = pd.concat([pd.Series(Y_out, name=Y_name), X_out], axis=1)
 
     # Replace infinite values with NaN
     plot_data.replace([np.inf, -np.inf], np.nan, inplace=True)
@@ -88,4 +96,3 @@ def hists(formula, data=None, bins=30, xcolor="blue", ycolor="red", norm=False, 
             plt.show()
             plt.clf()
             plt.close()
-
