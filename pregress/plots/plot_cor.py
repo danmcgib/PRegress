@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pregress.modeling.parse_formula import parse_formula
 
-def plot_cor(formula, data=None, main='Correlation Matrix', subplot=None, **kwargs):
+
+def plot_cor(formula, data=None, main='Correlation Matrix', xlab='Variables', ylab='Variables', subplot=None, **kwargs):
     """
     Generates a heatmap for the correlation matrix of a dataframe.
 
@@ -12,13 +13,15 @@ def plot_cor(formula, data=None, main='Correlation Matrix', subplot=None, **kwar
         formula (str or pandas.DataFrame): The formula or dataframe for which to compute the correlation matrix.
         data (pandas.DataFrame, optional): The dataframe for formula evaluation if a formula is provided.
         main (str, optional): Main title of the plot.
-        subplot (optional): Subplot for embedding the heatmap.
+        xlab (str, optional): Label for the x-axis.
+        ylab (str, optional): Label for the y-axis.
+        subplot (tuple, optional): Subplot for embedding the heatmap (nrows, ncols, index).
         kwargs: Additional keyword arguments for sns.heatmap() (e.g., annot, cmap, square, vmax, vmin, linewidths, etc.)
 
     Returns:
         None. Displays the heatmap.
     """
-    
+
     if isinstance(formula, pd.DataFrame):
         data = formula
         formula = None
@@ -48,13 +51,21 @@ def plot_cor(formula, data=None, main='Correlation Matrix', subplot=None, **kwar
         cmap.set_bad(color='black')  # Make NaN values appear in black
         kwargs['cmap'] = cmap
 
-    # Draw the heatmap, passing in all kwargs dynamically
+    # If a subplot is specified, use it; otherwise, create a new figure
+    if subplot:
+        plt.subplot(*subplot)
+    else:
+        plt.figure(figsize=(8, 6))
+
+    # Draw the heatmap with specified and default kwargs
     sns.heatmap(corr_matrix, **kwargs)
 
-    # Add main title
+    # Set main title, x-axis label, and y-axis label
     plt.title(main, fontsize=18)
+    plt.xlabel(xlab)
+    plt.ylabel(ylab)
 
-    # Rotate the tick labels for better readability
+    # Rotate the tick labels for readability
     plt.xticks(rotation=45, ha='right')
     plt.yticks(rotation=0)
 
