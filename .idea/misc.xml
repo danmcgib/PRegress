@@ -3,4 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="PRegress_Repo" />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="PRegress_Repo" project-jdk-type="Python SDK" />
 </project>
